@@ -1,0 +1,341 @@
+﻿USE [TShirt]
+GO
+/****** Object:  Table [dbo].[Size]    Script Date: 4/3/2022 9:05:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Size](
+	[SizeId] [int] NOT NULL,
+	[SizeName] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Size] PRIMARY KEY CLUSTERED 
+(
+	[SizeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Style]    Script Date: 4/3/2022 9:05:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Style](
+	[StyleId] [int] NOT NULL,
+	[StyleName] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Style] PRIMARY KEY CLUSTERED 
+(
+	[StyleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TShirt]    Script Date: 4/3/2022 9:05:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TShirt](
+	[TShirtId] [int] IDENTITY(1,1) NOT NULL,
+	[Gender] [varchar](1) NOT NULL,
+	[Made] [varchar](100) NOT NULL,
+	[Price] [numeric](18, 2) NOT NULL,
+	[Color] [varchar](20) NOT NULL,
+	[SizeId] [int] NOT NULL,
+	[StyleId] [int] NOT NULL,
+	[Description] [varchar](max) NOT NULL,
+	[ActualFileName] [varchar](200) NOT NULL,
+	[NewFileName] [uniqueidentifier] NOT NULL,
+	[FileExtension] [varchar](10) NOT NULL,
+	[FileSizeInKB] [int] NOT NULL,
+	[CreatedByUserId] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[IsDeleted] [bit] NULL,
+	[DeletedByUserId] [int] NULL,
+	[DeletedOn] [datetime] NULL,
+ CONSTRAINT [PK__TShirt__2EAAAF2BD82939AC] PRIMARY KEY CLUSTERED 
+(
+	[TShirtId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+INSERT [dbo].[Size] ([SizeId], [SizeName]) VALUES (1, N'S')
+GO
+INSERT [dbo].[Size] ([SizeId], [SizeName]) VALUES (2, N'M')
+GO
+INSERT [dbo].[Style] ([StyleId], [StyleName]) VALUES (1, N'Round neck')
+GO
+INSERT [dbo].[Style] ([StyleId], [StyleName]) VALUES (2, N'Square neck')
+GO
+SET IDENTITY_INSERT [dbo].[TShirt] ON 
+GO
+INSERT [dbo].[TShirt] ([TShirtId], [Gender], [Made], [Price], [Color], [SizeId], [StyleId], [Description], [ActualFileName], [NewFileName], [FileExtension], [FileSizeInKB], [CreatedByUserId], [CreatedOn], [IsDeleted], [DeletedByUserId], [DeletedOn]) VALUES (1, N'M', N'India', CAST(100.00 AS Numeric(18, 2)), N'Red', 1, 2, N'test', N'Cap-sleeve-t-shirt_122719', N'c9695739-3419-4636-b81a-c2b1e9d2ddb3', N'webp', 11134, 1, CAST(N'2022-04-01T02:57:10.983' AS DateTime), 1, 1, CAST(N'2022-04-03T06:00:48.007' AS DateTime))
+GO
+INSERT [dbo].[TShirt] ([TShirtId], [Gender], [Made], [Price], [Color], [SizeId], [StyleId], [Description], [ActualFileName], [NewFileName], [FileExtension], [FileSizeInKB], [CreatedByUserId], [CreatedOn], [IsDeleted], [DeletedByUserId], [DeletedOn]) VALUES (2, N'M', N'China', CAST(200.00 AS Numeric(18, 2)), N'Blue', 2, 1, N'new t shirt', N'Half-Tshirt-Singlet_122719', N'0ff0337c-acd9-41e4-8602-9f3c5a5262a3', N'webp', 16926, 1, CAST(N'2022-04-01T02:59:48.093' AS DateTime), 1, 1, CAST(N'2022-04-01T21:25:48.057' AS DateTime))
+GO
+INSERT [dbo].[TShirt] ([TShirtId], [Gender], [Made], [Price], [Color], [SizeId], [StyleId], [Description], [ActualFileName], [NewFileName], [FileExtension], [FileSizeInKB], [CreatedByUserId], [CreatedOn], [IsDeleted], [DeletedByUserId], [DeletedOn]) VALUES (3, N'M', N'Srilanka', CAST(150.00 AS Numeric(18, 2)), N'White', 2, 2, N'Round neck', N'Turtle-neck-shirt_122719-2', N'2749635d-9611-4b0c-9d6d-aa1379be41e1', N'webp', 4742, 1, CAST(N'2022-04-01T03:27:38.297' AS DateTime), 1, 1, CAST(N'2022-04-03T06:03:54.590' AS DateTime))
+GO
+INSERT [dbo].[TShirt] ([TShirtId], [Gender], [Made], [Price], [Color], [SizeId], [StyleId], [Description], [ActualFileName], [NewFileName], [FileExtension], [FileSizeInKB], [CreatedByUserId], [CreatedOn], [IsDeleted], [DeletedByUserId], [DeletedOn]) VALUES (4, N'M', N'India', CAST(100.00 AS Numeric(18, 2)), N'Red', 2, 1, N'test 1', N'Pocket-T-shirt_122719', N'c15b1aac-b96e-4c07-9821-f13cc7de325b', N'webp', 12270, 1, CAST(N'2022-04-02T23:01:04.420' AS DateTime), 1, 1, CAST(N'2022-04-03T06:06:40.383' AS DateTime))
+GO
+INSERT [dbo].[TShirt] ([TShirtId], [Gender], [Made], [Price], [Color], [SizeId], [StyleId], [Description], [ActualFileName], [NewFileName], [FileExtension], [FileSizeInKB], [CreatedByUserId], [CreatedOn], [IsDeleted], [DeletedByUserId], [DeletedOn]) VALUES (5, N'M', N'India', CAST(100.00 AS Numeric(18, 2)), N'Red', 2, 2, N'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ', N'Pocket-T-shirt_122719', N'727f64a6-d36c-4750-8ac8-28948b9b0dc1', N'webp', 12270, 1, CAST(N'2022-04-03T06:13:47.200' AS DateTime), 0, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[TShirt] OFF
+GO
+ALTER TABLE [dbo].[TShirt] ADD  CONSTRAINT [DF_TShirt_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+/****** Object:  StoredProcedure [dbo].[AddTShirt]    Script Date: 4/3/2022 9:05:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE proc [dbo].[AddTShirt]
+(
+		@Gender				varchar(1)
+	,	@Made				varchar(100)
+	,	@Price				numeric(18,2)
+	,	@Color				varchar(20)
+	,	@SizeId				int
+	,	@StyleId			int
+	,	@Description		varchar(max)
+	,	@ActualFileName		varchar(200)
+	,	@NewFileName		uniqueidentifier
+	,	@FileExtension		varchar(10)
+	,	@FileSizeInKB		int
+	,	@CreatedByUserId	int
+)
+as
+insert into TShirt
+(
+	  Gender
+	, Made
+	, Price
+	, Color
+	, SizeId
+	, StyleId
+	, Description
+	, ActualFileName
+	, NewFileName
+	, FileExtension
+	, FileSizeInKB
+	, CreatedByUserId
+	, CreatedOn
+)
+values
+(
+		@Gender				
+	,	@Made				
+	,	@Price				
+	,	@Color				
+	,	@SizeId				
+	,	@StyleId			
+	,	@Description		
+	,	@ActualFileName		
+	,	convert(uniqueidentifier,@NewFileName)
+	,	@FileExtension	
+	,	@FileSizeInKB
+	,	@CreatedByUserId
+	,	getdate()
+)
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteTShirt]    Script Date: 4/3/2022 9:05:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[DeleteTShirt]
+	@TShirtId int,
+	@UserId int
+as
+update 
+	TShirt 
+set 
+	IsDeleted=1
+	,DeletedByUserId=@UserId
+	,DeletedOn=getdate()
+where
+	TShirtId=@TShirtId
+GO
+/****** Object:  StoredProcedure [dbo].[GetAllTShirt]    Script Date: 4/3/2022 9:05:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE proc [dbo].[GetAllTShirt]
+as
+select
+	  a.TShirtId
+	, a.Gender
+	, a.Made
+	, a.Price
+	, a.Color
+	, a.SizeId
+	, b.SizeName
+	, a.StyleId
+	, c.StyleName
+	, a.Description
+	, a.ActualFileName
+	, a.NewFileName
+	, a.FileExtension
+	, a.FileSizeInKB
+	, a.CreatedByUserId
+	, a.CreatedOn
+ from
+ TShirt a 
+ join Size b on a.SizeId=b.SizeId
+ join Style c on c.StyleId=a.StyleId
+ and a.IsDeleted=0
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetSizes]    Script Date: 4/3/2022 9:05:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+create proc [dbo].[GetSizes]
+as
+select
+	SizeId,
+	SizeName
+ from
+ Size with (nolock)
+GO
+/****** Object:  StoredProcedure [dbo].[GetStyles]    Script Date: 4/3/2022 9:05:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+create proc [dbo].[GetStyles]
+as
+select
+	StyleId,
+	StyleName
+ from
+ Style with (nolock)
+GO
+/****** Object:  StoredProcedure [dbo].[GetTShirtById]    Script Date: 4/3/2022 9:05:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE proc [dbo].[GetTShirtById]
+(
+	@TShirtdId int
+)
+as
+select
+	  a.TShirtId
+	, a.Gender
+	, a.Made
+	, a.Price
+	, a.Color
+	, a.SizeId
+	, b.SizeName
+	, a.StyleId
+	, c.StyleName
+	, a.Description
+	, a.ActualFileName
+	, a.NewFileName
+	, a.FileExtension
+	, a.FileSizeInKB
+	, a.CreatedByUserId
+	, a.CreatedOn
+ from
+ TShirt a 
+ join Size b on a.SizeId=b.SizeId
+ join Style c on c.StyleId=a.StyleId
+ and a.IsDeleted=0
+ where a.TShirtId=@TShirtdId
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateTShirt]    Script Date: 4/3/2022 9:05:25 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE proc [dbo].[UpdateTShirt]
+(
+		@TShirtId			int
+	,	@Gender				varchar(1)
+	,	@Made				varchar(100)
+	,	@Price				numeric(18,2)
+	,	@Color				varchar(20)
+	,	@SizeId				varchar(50)
+	,	@StyleId			varchar(50)
+	,	@Description		varchar(100)
+	,	@ActualFileName		varchar(200)
+	,	@NewFileName		varchar(200)
+	,	@FileExtension		varchar(10)
+	,	@FileSizeInKB		int
+	,	@CreatedByUserId	int
+)
+as
+
+insert into TShirt
+(
+		TShirtId
+	,	Gender
+	,	Made
+	,	Price
+	,	Color
+	,	SizeId
+	,	StyleId
+	,	Description
+	,	ActualFileName
+	,	NewFileName
+	,	FileExtension
+	,	FileSizeInKB
+	,	CreatedByUserId
+	,	CreatedOn
+	,	IsDeleted
+	,	DeletedByUserId
+	,	DeletedOn
+)
+select
+		TShirtId
+	,	Gender
+	,	Made
+	,	Price
+	,	Color
+	,	SizeId
+	,	StyleId
+	,	Description
+	,	ActualFileName
+	,	NewFileName
+	,	FileExtension
+	,	FileSizeInKB
+	,	CreatedByUserId
+	,	CreatedOn
+	,	IsDeleted
+	,	DeletedByUserId
+	,	DeletedOn
+from	TShirt
+where	TShirtId=@TShirtId
+
+
+
+Update TShirt
+set
+	  Gender=@Gender
+	, Made=@Made
+	, Price=@Price
+	, Color=@Color
+	, SizeId=@SizeId
+	, StyleId=@StyleId
+	, Description=@Description
+	, ActualFileName=@ActualFileName
+	, NewFileName=@NewFileName
+	, FileExtension=@FileExtension
+	, FileSizeInKB=@FileSizeInKb
+	, CreatedByUserId=@CreatedByUserId
+	, CreatedOn=getdate()
+where TShirtId=@TShirtId
+
+GO
