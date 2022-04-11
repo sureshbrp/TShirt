@@ -68,8 +68,10 @@ namespace TShirt.API
 
         public async Task<int> UpdateTShirt(Shirt shirt)
         {
-            SqlParameter[] sParams =
-                {
+            try
+            {
+                SqlParameter[] sParams =
+                    {
                     new SqlParameter("@TShirtId", shirt.TShirtId),
                     new SqlParameter("@Gender", shirt.Gender),
                     new SqlParameter("@Made", shirt.Made),
@@ -84,7 +86,12 @@ namespace TShirt.API
                     new SqlParameter("@FileSizeInKB", shirt.FileSizeInKB),
                     new SqlParameter("@CreatedByUserId", shirt.CreatedByUserId),
                 };
-            return await _helper.ExecuteNonQueryAsync("UpdateTShirt", sParams);
+                return await _helper.ExecuteNonQueryAsync("UpdateTShirt", sParams);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

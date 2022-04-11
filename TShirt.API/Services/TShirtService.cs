@@ -36,7 +36,10 @@ namespace TShirt.API
         public async Task<bool> UpdateShirt(Shirt shirt)
         {
             bool isBoolean = false;
-            shirt.NewFileName = Guid.NewGuid().ToString();
+
+            var oldData = await GetTShirtById(shirt.TShirtId);
+
+            shirt.NewFileName = shirt.Image != null ? Guid.NewGuid().ToString():oldData.NewFileName;
             int isUpdated = await _dal.UpdateTShirt(shirt);
             if(isUpdated > 0)
             {
@@ -46,6 +49,9 @@ namespace TShirt.API
                     using (FileStream stream = new FileStream(path, FileMode.Create))
                     {
                         await shirt.Image.CopyToAsync(stream);
+
+                        MoveToArchieve($"{oldData.NewFileName}.{oldData.FileExtension}");
+
                         isBoolean = true;
                     }
                 }

@@ -17,6 +17,11 @@ namespace TShirt.API.Controllers
             _tShirt = tshirt;
         }
 
+        /// <summary>
+        /// This my first api and this will insert a tshirt data
+        /// </summary>
+        /// <param name="shirt"></param>
+        /// <returns></returns>
         [HttpPost("add")]
         public async Task<ActionResult<Shirt>> AddTshirt([FromForm] Shirt shirt) => Ok(await _tShirt.AddTShirt(shirt));
        
@@ -33,7 +38,7 @@ namespace TShirt.API.Controllers
         public async Task<ActionResult<IEnumerable<Option>>> GetAllStyles() => Ok(await _tShirt.GetAllStyles());
 
         [HttpDelete("delete")]
-        public async Task<ActionResult<bool>> DeleteTshirt(int id, int userId) => Ok(await _tShirt.DeleteTShirt(id, userId));
+        public async Task<ActionResult<bool>> DeleteTshirt(int id) => Ok(await _tShirt.DeleteTShirt(id, 1));
 
         [HttpGet("image")]
         public IActionResult GetFile(string file)
@@ -42,7 +47,7 @@ namespace TShirt.API.Controllers
             return new FileContentResult(byteArray, "application/octet-stream");
         }
 
-        [HttpPut("update")]
+        [HttpPost("update")]
         public async Task<ActionResult<bool>> UpdateTShirt([FromForm] Shirt shirt) => Ok(await _tShirt.UpdateShirt(shirt));
 
     }

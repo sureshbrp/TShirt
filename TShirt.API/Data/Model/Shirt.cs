@@ -43,10 +43,10 @@ namespace TShirt.API.Model
         public string ActualFileName { get; set; }
         public string NewFileName { get; set; }
         public string FileExtension { get; set; }
-        public int FileSizeInKB { get; set; }
+        public int? FileSizeInKB { get; set; }
         public int CreatedByUserId { get; set; }
         public DateTime CreatedOn { get; set; }
-        public IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; } 
         public string ImageFileUrl { get; set; }
 	}
 }
