@@ -25,6 +25,10 @@ namespace TShirt.API
             shirt.NewFileName = Guid.NewGuid().ToString();
             int shirtId = await _dal.AddTShirt(shirt);
             shirt.TShirtId = shirtId;
+            if (!Directory.Exists(mainDirectory))
+            {
+                Directory.CreateDirectory(mainDirectory);
+            }
             var path = Path.Combine(mainDirectory, $"{shirt.NewFileName}.{shirt.FileExtension}");
             using (FileStream stream = new FileStream(path, FileMode.Create))
             {
